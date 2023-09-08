@@ -68,27 +68,27 @@ There are a few steps required before the module can be used.
 
    ```yml
    manifest:
-   	version: 0.7
+     version: 0.7
 
-   	self:
-   		# Where this repository should be cloned to.
-   		path: module-example
+     self:
+       # Where this repository should be cloned to.
+       path: module-example
    ```
 
 4. `zephyr/module.yml` is configured without pointing to the dts root directory nor the board root directory, this can be added like so.
 
    ```yml
    build:
-   # ...
-   settings:
-   	# Additional roots for boards and DTS files. Zephyr will use the
-   	# `<board_root>/boards` for additional boards. The `.` is the root of this
-   	# repository.
-   	board_root: .
-   	# Zephyr will use the `<dts_root>/dts` for additional dts files and
-   	# `<dts_root>/dts/bindings` for additional dts binding files. The `.` is
-   	# the root of this repository.
-   	dts_root: .
+     # ...
+     settings:
+       # Additional roots for boards and DTS files. Zephyr will use the
+       # `<board_root>/boards` for additional boards. The `.` is the root of this
+       # repository.
+       board_root: .
+       # Zephyr will use the `<dts_root>/dts` for additional dts files and
+       # `<dts_root>/dts/bindings` for additional dts binding files. The `.` is
+       # the root of this repository.
+       dts_root: .
    ```
 
 ## Add module to an application
