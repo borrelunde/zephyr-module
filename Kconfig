@@ -1,0 +1,7 @@
+# Uncomment and replace MODULE_NAME with the actual module name.
+
+# config MODULE_NAME
+# 	bool "MODULE_NAME support"
+# 	default n
+# 	help
+# 		This option enables MODULE_NAME.

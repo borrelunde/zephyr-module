@@ -1,0 +1,7 @@
+manifest:
+  version: 0.7
+
+  # Uncomment and replace MODULE_NAME with module repository name.
+  # self:
+    # Where this repository should be cloned to.
+    # path: MODULE_NAME
