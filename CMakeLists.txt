@@ -2,11 +2,11 @@
 if (CONFIG_MODULE_NAME)
 
 	# Include internal header files.
-	zephyr_include_directories(include)
-	zephyr_include_directories(drivers)
+	# zephyr_include_directories(include)
+	# zephyr_include_directories(drivers)
 
 	# Add internal source files.
-	add_subdirectory(lib)
-	add_subdirectory(drivers)
+	# add_subdirectory(lib)
+	# add_subdirectory(drivers)
 
 endif()
