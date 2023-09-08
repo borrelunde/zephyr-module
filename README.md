@@ -34,62 +34,85 @@ Install west.
 pip install west
 ```
 
-Initialize the workspace and get the Zephyr source code.
+Initialize the workspace.
 
 ```shell
 west init -m https://github.com/borrelunde/zephyr-module --mr master zephyr-module-project
-cd zephyr-module-project
-west update
 ```
 
 Enter the application directory.
 
 ```shell
-cd zephyr-module
+cd zephyr-module-project\zephyr-module
+```
+
+Open in Visual Studio Code.
+
+```shell
+code .
 ```
 
 ## Initial set-up
 
 There are a few steps required before the module can be used.
 
-1. `Kconfig` needs to configure the library support option. Simply uncomment the comments and replace `MODULE_NAME` with the actual module name.
+1.  `Kconfig`  
+    Configure the library support option. Simply uncomment the comments and replace `MODULE_NAME` with the actual module name. The Kconfig option should be all uppercase.
 
-   ```
-   config MODULE_EXAMPLE
-   	bool "Module example support"
-   	default n
-   	help
-   		This option enables module example.
-   ```
+    ```
+    config MODULE_EXAMPLE
+    	bool "Module example support"
+    	default n
+    	help
+    		This option enables module example.
+    ```
 
-2. `CMakeLists.txt` is configured for a simple module, it might need to be expanded upon later.
+2.  `CMakeLists.txt`  
+    Change the Kconfig option to match the one in `Kconfig`. Uncomment as needed the include and add calls as the module progresses.
 
-3. `west.yml` does not need to be changed, however, it is considered good practice to set the self path.
+    ```
+    # Only include header files and add source files if the module is enabled.
+    if (CONFIG_MODULE_EXAMPLE)
 
-   ```yml
-   manifest:
-     version: 0.7
+        # Include internal header files.
+        # zephyr_include_directories(include)
+        # zephyr_include_directories(drivers)
 
-     self:
-       # Where this repository should be cloned to.
-       path: module-example
-   ```
+        # Add internal source files.
+        # add_subdirectory(lib)
+        # add_subdirectory(drivers)
 
-4. `zephyr/module.yml` is configured without pointing to the dts root directory nor the board root directory, this can be added like so.
+    endif()
+    ```
 
-   ```yml
-   build:
-     # ...
-     settings:
-       # Additional roots for boards and DTS files. Zephyr will use the
-       # `<board_root>/boards` for additional boards. The `.` is the root of this
-       # repository.
-       board_root: .
-       # Zephyr will use the `<dts_root>/dts` for additional dts files and
-       # `<dts_root>/dts/bindings` for additional dts binding files. The `.` is
-       # the root of this repository.
-       dts_root: .
-   ```
+3.  `west.yml`  
+    No change is stricly required, however, it is considered good practice to set the self path.
+
+    ```yml
+    manifest:
+      version: 0.7
+
+      self:
+        # Where this repository should be cloned to.
+        path: module-example
+    ```
+
+4.  `zephyr/module.yml`  
+    Originally the module is configured without pointing to the dts root directory nor the board root directory, this can be added like so:
+
+    ```yml
+    build:
+      # ...
+      settings:
+        # Additional roots for boards and DTS files. Zephyr will use the
+        # `<board_root>/boards` for additional boards. The `.` is the root of this
+        # repository.
+        board_root: .
+        # Zephyr will use the `<dts_root>/dts` for additional dts files and
+        # `<dts_root>/dts/bindings` for additional dts binding files. The `.` is
+        # the root of this repository.
+        dts_root: .
+    ```
 
 ## Add module to an application
 
